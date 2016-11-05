@@ -1,4 +1,4 @@
-package com.lancefallon.cron;
+package com.lancefallon.usermgmt.config.schedule;
 
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;

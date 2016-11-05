@@ -38,12 +38,15 @@ public class UserScheduler {
 	/**
 	 * run every five seconds, with an initial 1 second delay
 	 */
-	@Scheduled(fixedDelay = 1000, initialDelay=1000)
+	@Scheduled(fixedDelay = 60000*60, initialDelay=1000)
 	public void addDummyUser() {
-		String username = "johndoe_" + new Date().getTime();
-		User user = new User(-1, username, username + "gmail.com", new Date());
-		Integer newUserId = userService.addUser(user);
-		System.out.println("New user added: userId#" + newUserId);
+		for(int i = 0; i < 50; i++){
+			String username = "johndoe_" + new Date().getTime();
+			User user = new User(-1, username, username + "gmail.com", new Date());
+			Integer newUserId = userService.addUser(user);
+			System.out.println("New user added: userId#" + newUserId);	
+		}
+		
 	}
 	
 }

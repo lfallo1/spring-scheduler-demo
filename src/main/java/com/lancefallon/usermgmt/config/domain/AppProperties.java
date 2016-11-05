@@ -1,6 +1,12 @@
 package com.lancefallon.usermgmt.config.domain;
 
-public class AppConfig {
+/**
+ * helper class to store app properties.
+ * this class should be created as a bean, and fill the properties
+ * @author lancefallon
+ *
+ */
+public class AppProperties {
 
 	private String sendgridApiKey;
 	private String emailHost;

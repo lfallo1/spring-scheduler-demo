@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<title>Hello AngularJS</title>
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
+
+<!-- css dependencies -->
+<link href="bower/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="bower/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body ng-app="springDemoApp">
+	<div ng-view class="container"></div>
+	
+	<!-- jquery / bootstrap -->
+	<script src="bower/jquery/dist/jquery.js"></script>
+	<script src="bower/bootstrap/dist/js/bootstrap.js"></script>
+	
+	<!-- Angular dependencies -->
+	<script src="bower/angular/angular.js"></script>
+	<script src="bower/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower/angular-route/angular-route.js"></script>
+	
+	<!-- Angular -->
+	<script src="app/app.js"></script>
+	
+	<!-- Controllers -->
+	<script src="app/home/homeController.js"></script>
+	
+	<!-- Common -->
+	<script src="app/common/apiService.js"></script>
+	
+	<!-- Constants -->
+	<script src="app/constants/userApiConstants.js"></script>
+</body>
+</html>

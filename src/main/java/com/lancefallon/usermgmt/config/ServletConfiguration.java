@@ -3,6 +3,8 @@ package com.lancefallon.usermgmt.config;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.servlet.Filter;
+
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactory;
 
-import com.lancefallon.usermgmt.config.domain.AppConfig;
+import com.lancefallon.usermgmt.config.domain.AppProperties;
+import com.lancefallon.usermgmt.config.filter.AppFilter;
 
+/**
+ * primary initialization class.
+ * creates various beans for email, velocity, and filters
+ * @author lancefallon
+ *
+ */
 @Configuration
-public class EmailConfiguration {
+public class ServletConfiguration {
 
 	@Autowired
-	private AppConfig appConfig;
+	private AppProperties appConfig;
 	
 	@Bean
 	public VelocityEngine generateVelocityTemplate() throws VelocityException, IOException{
@@ -35,6 +44,20 @@ public class EmailConfiguration {
 		sender.setHost(appConfig.getEmailHost());
 		sender.setPort(appConfig.getEmailPort());
 		return sender;
+	}
+	
+	@Bean
+	public Filter customFilter() {
+		return new AppFilter();
+	}
+	
+	@Bean
+	public AppProperties generateAppConfig(){
+		AppProperties config = new AppProperties();
+		config.setSendgridApiKey("Z9uEf1ApQqupYtwwacWzLg");
+		config.setEmailHost("127.0.0.1");
+		config.setEmailPort(1025);
+		return config;
 	}
 	
 }

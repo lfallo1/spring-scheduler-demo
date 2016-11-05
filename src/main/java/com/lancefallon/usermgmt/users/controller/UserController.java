@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lancefallon.usermgmt.users.model.User;
 import com.lancefallon.usermgmt.users.service.UserService;
 
+/**
+ * user api endpoint
+ * @author lancefallon
+ *
+ */
 @RestController
 @RequestMapping("api/users")
 public class UserController {

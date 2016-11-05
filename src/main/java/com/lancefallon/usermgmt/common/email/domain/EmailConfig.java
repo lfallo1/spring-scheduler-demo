@@ -1,6 +1,12 @@
 package com.lancefallon.usermgmt.common.email.domain;
 
-public class EmailConfig {
+/**
+ * Parent Email Config class - abstract
+ * Class should not be instantiated. Extend this class with domain specific properties for individual use cases
+ * @author lancefallon
+ *
+ */
+public abstract class EmailConfig {
 
 	private String to;
 	private String subject;

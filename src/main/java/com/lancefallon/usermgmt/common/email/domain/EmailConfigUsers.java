@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.lancefallon.usermgmt.users.model.User;
 
+/**
+ * Email config for user related emails
+ * @author lancefallon
+ *
+ */
 public class EmailConfigUsers extends EmailConfig {
 
 	private List<User> users;

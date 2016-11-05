@@ -16,11 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+	/**
+	 * default route
+	 * @return
+	 */
 	@RequestMapping("/")
 	public String getIndex(){
 		return "index.html";
 	}
 	
+	/**
+	 * redirect 404 to the index (this also resets the url to mysite.com/)
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping("/404.html")
 	public void pageNotFound(HttpServletResponse response) throws IOException {
 		response.sendRedirect("/");

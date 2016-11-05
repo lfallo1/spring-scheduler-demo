@@ -177,6 +177,9 @@ public class ServletConfiguration implements EmbeddedServletContainerCustomizer 
 		flyway.migrate();	
 	}
 
+	/**
+	 * configure 404s to be redirected to a request mapper that accepts routes of 404.html
+	 */
 	@Override
 	  public void customize(ConfigurableEmbeddedServletContainer container) {
 	    container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));

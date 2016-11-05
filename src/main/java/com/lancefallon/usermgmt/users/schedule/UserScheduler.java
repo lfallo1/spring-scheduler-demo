@@ -1,14 +1,11 @@
 package com.lancefallon.usermgmt.users.schedule;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.lancefallon.usermgmt.common.email.domain.EmailConfigUsers;
 import com.lancefallon.usermgmt.common.email.service.EmailService;
-import com.lancefallon.usermgmt.users.model.User;
 import com.lancefallon.usermgmt.users.service.UserService;
 
 @Component
@@ -27,12 +24,12 @@ public class UserScheduler {
 //	@Scheduled(cron = "0 48 13 * * *")
 	@Scheduled(fixedDelay = 15000, initialDelay=7000)
 	public void emailUserReport() throws InterruptedException{
-		EmailConfigUsers config = new EmailConfigUsers();
-		config.setTo("fallon.lance@gmail.com");
-		config.setSubject("Nightly user report");
-		config.setTemplate("velocity/nightlyUserSummary.vm");
-		config.setUsers(userService.findAll());
-		emailService.sendMail(config);
+//		EmailConfigUsers config = new EmailConfigUsers();
+//		config.setTo("fallon.lance@gmail.com");
+//		config.setSubject("Nightly user report");
+//		config.setTemplate("velocity/nightlyUserSummary.vm");
+//		config.setUsers(userService.findAll());
+//		emailService.sendMail(config);
 	}
 	
 	/**
@@ -40,12 +37,12 @@ public class UserScheduler {
 	 */
 	@Scheduled(fixedDelay = 60000*60, initialDelay=1000)
 	public void addDummyUser() {
-		for(int i = 0; i < 50; i++){
-			String username = "johndoe_" + new Date().getTime();
-			User user = new User(-1, username, username + "gmail.com", new Date());
-			Integer newUserId = userService.addUser(user);
-			System.out.println("New user added: userId#" + newUserId);	
-		}
+//		for(int i = 0; i < 50; i++){
+//			String username = "johndoe_" + new Date().getTime();
+//			User user = new User(-1, username, username + "gmail.com", new Date());
+//			Integer newUserId = userService.addUser(user);
+//			System.out.println("New user added: userId#" + newUserId);	
+//		}
 		
 	}
 	

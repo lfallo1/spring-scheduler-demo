@@ -1,43 +1,50 @@
 package com.lancefallon.usermgmt.users.repository;
 
-import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
-import java.util.NoSuchElementException;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
 import com.lancefallon.usermgmt.users.model.User;
+import com.lancefallon.usermgmt.users.sql.UserSql;
 
 @Service
-public class UserRepository {
+public class UserRepository extends JdbcDaoSupport implements UserSql {
 	
-	private List<User> users = new ArrayList<>();
-	
-	public UserRepository(){
+	public UserRepository(@Autowired @Qualifier("primary") DataSource dataSource) {
+		setDataSource(dataSource);
 	}
-	
-	public List<User> findAll(){
-		return users;
+
+	public Integer addUser(User user) {
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		getJdbcTemplate().update(connection -> {
+			PreparedStatement ps = connection.prepareStatement(USER_ADD_SQL,
+					Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getEmail());
+			ps.setDate(3, new java.sql.Date(user.getDob().getTime()));
+			return ps;
+		}, keyHolder);
+
+		return keyHolder.getKey().intValue();
 	}
-	
-	public User findById(Integer id){
-		try{
-			return users.stream().filter(u->u.getId().equals(id)).findFirst().get();
-		} catch(NoSuchElementException e){
-			return null;
-		}
+
+	public List<User> findAll() {
+		return getJdbcTemplate().query(USER_FIND_ALL, USER_ROW_MAPPER);
 	}
-	
-	public Integer addUser(User user){
-		Integer newId = nextId();
-		user.setId(newId);
-		users.add(user);
-		return newId;
+
+	public User findById(Integer id) {
+		
+		return getJdbcTemplate().queryForObject(USER_FIND_BY_ID_SQL, new Object[]{ id }, USER_ROW_MAPPER);
 	}
-	
-	private Integer nextId(){
-		users.sort((u1,u2)->-u1.getId().compareTo(u2.getId()));
-		return users.size() > 0 ? users.get(0).getId() + 1 : 1;
-	}
-	
+
 }

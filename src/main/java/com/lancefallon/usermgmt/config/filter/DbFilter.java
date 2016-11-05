@@ -10,7 +10,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-public class AppFilter implements Filter {
+import com.lancefallon.usermgmt.config.db.domain.DbContextHolder;
+import com.lancefallon.usermgmt.config.db.domain.DbType;
+
+public class DbFilter implements Filter {
 	private static final String RESPONSE_HEADER_EXPIRES = "Expires";
 
 	private static final String NO_CACHE = "no-cache";
@@ -24,7 +27,7 @@ public class AppFilter implements Filter {
 	/**
 	 * Default constructor.
 	 */
-	public AppFilter() {
+	public DbFilter() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -50,7 +53,19 @@ public class AppFilter implements Filter {
 		// HTTP 1.0. Proxies.
 		httpResponse.setHeader(RESPONSE_HEADER_PRAGMA, NO_CACHE);
 		httpResponse.setDateHeader(RESPONSE_HEADER_EXPIRES, 0);
-		chain.doFilter(request, response);
+		
+		String key = request.getParameter("key");
+		if (DbType.DB_BACKUP.equalsIgnoreCase(key)){
+			DbContextHolder.setDbType(DbType.DB_BACKUP);
+		} else{
+			DbContextHolder.setDbType(DbType.DB_DEFAULT);
+		}
+		
+		try{
+			chain.doFilter(request, response);
+		} finally{
+			DbContextHolder.clearDbType();
+		}
 	}
 
 	/**

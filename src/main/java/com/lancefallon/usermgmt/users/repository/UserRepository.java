@@ -1,13 +1,13 @@
 package com.lancefallon.usermgmt.users.repository;
 
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -26,16 +26,21 @@ public class UserRepository extends JdbcDaoSupport implements UserSql {
 	public Integer addUser(User user) {
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		getJdbcTemplate().update(connection -> {
-			PreparedStatement ps = connection.prepareStatement(USER_ADD_SQL,
-					Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, user.getUsername());
-			ps.setString(2, user.getEmail());
-			ps.setDate(3, new java.sql.Date(user.getDob().getTime()));
-			return ps;
-		}, keyHolder);
-
-		return keyHolder.getKey().intValue();
+		try{
+			getJdbcTemplate().update(connection -> {
+				PreparedStatement ps = connection.prepareStatement(USER_ADD_SQL,
+						new String[]{USER_COL_ID});
+				ps.setString(1, user.getUsername());
+				ps.setString(2, user.getEmail());
+				ps.setDate(3, new java.sql.Date(user.getDob().getTime()));
+				return ps;
+			}, keyHolder);
+	
+			return keyHolder.getKey().intValue();
+		} catch(DataAccessException e){
+			System.out.println("record not added: " + e.getMessage());
+			return -1;
+		}
 	}
 
 	public List<User> findAll() {

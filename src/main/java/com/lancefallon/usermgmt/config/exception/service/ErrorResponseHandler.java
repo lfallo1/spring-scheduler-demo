@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.lancefallon.usermgmt.config.exception.domain.CustomErrorMessage;
 import com.lancefallon.usermgmt.config.exception.domain.InvalidCredentialsException;
-import com.lancefallon.usermgmt.config.exception.domain.PageNotFoundException;
 
 /**
  * global error handler / response generator
@@ -28,10 +27,5 @@ public class ErrorResponseHandler {
 	@ExceptionHandler(InvalidCredentialsException.class)
     ResponseEntity<CustomErrorMessage> handleInvalidCredentialsException(InvalidCredentialsException ex) throws IOException {
         return new ResponseEntity<CustomErrorMessage>(ex.getError(), HttpStatus.FORBIDDEN);
-    }
-	
-	@ExceptionHandler(PageNotFoundException.class)
-    ResponseEntity<String> handlePageNotFound(PageNotFoundException ex) throws IOException {
-        return new ResponseEntity<String>("Page not found", HttpStatus.NOT_FOUND);
     }
 }

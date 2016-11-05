@@ -14,7 +14,7 @@ public interface UserSql {
 	
 	//sql
 	String USER_FIND_BY_ID_SQL = String.format("select * from public.user where %s = ?", USER_COL_ID);
-	String USER_ADD_SQL = String.format("inser into public.user (%s, %s, %s) values(?,?,?)", USER_COL_USERNAME, USER_COL_EMAIL, USER_COL_DOB);
+	String USER_ADD_SQL = String.format("insert into public.user (%s, %s, %s) values(?,?,?)", USER_COL_USERNAME, USER_COL_EMAIL, USER_COL_DOB);
 	String USER_FIND_ALL = "select * from public.user";
 	
 	//mappers

@@ -39,11 +39,10 @@ public class UserScheduler {
 	public void addDummyUser() {
 //		for(int i = 0; i < 50; i++){
 //			String username = "johndoe_" + new Date().getTime();
-//			User user = new User(-1, username, username + "gmail.com", new Date());
+//			User user = new User(null, username, username + "gmail.com", new Date());
 //			Integer newUserId = userService.addUser(user);
 //			System.out.println("New user added: userId#" + newUserId);	
 //		}
-		
 	}
 	
 }

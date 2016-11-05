@@ -21,7 +21,7 @@ public class IndexController {
 		return "index.html";
 	}
 	
-	@RequestMapping("/404")
+	@RequestMapping("/404.html")
 	public void pageNotFound(HttpServletResponse response) throws IOException {
 		response.sendRedirect("/");
 	}

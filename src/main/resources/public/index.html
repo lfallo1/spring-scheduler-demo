@@ -15,6 +15,8 @@
 </head>
 
 <body ng-app="springDemoApp">
+
+	<div ng-include="'app/shared/changeDb/changeDb.html'"></div>
 	<div ng-view class="container"></div>
 	
 	<!-- jquery / bootstrap -->
@@ -30,15 +32,18 @@
 	<script src="app/app.js"></script>
 	
 	<!-- Controllers -->
-	<script src="app/home/homeController.js"></script>
+	<script src="app/modules/home/homeController.js"></script>
+	<script src="app/shared/changeDb/changeDbController.js"></script>
 	
 	<!-- Config -->
 	<script src="app/config/httpRequestInterceptor.js"></script>
 	
-	<!-- Common -->
-	<script src="app/common/apiService.js"></script>
-	
 	<!-- Constants -->
 	<script src="app/constants/userApiConstants.js"></script>
+	<script src="app/constants/dbConstants.js"></script>
+	
+	<!-- Services -->
+	<script src="app/services/dbService.js"></script>
+	<script src="app/services/apiService.js"></script>
 </body>
 </html>

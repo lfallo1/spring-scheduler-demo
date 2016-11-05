@@ -15,9 +15,13 @@ import org.flywaydb.core.api.MigrationVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactory;
 
@@ -35,7 +39,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  *
  */
 @Configuration
-public class ServletConfiguration {
+public class ServletConfiguration implements EmbeddedServletContainerCustomizer {
 
 	@Autowired
 	private AppProperties appConfig;
@@ -172,4 +176,9 @@ public class ServletConfiguration {
 		flyway.setDataSource(getBackupDataSource());
 		flyway.migrate();	
 	}
+
+	@Override
+	  public void customize(ConfigurableEmbeddedServletContainer container) {
+	    container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
+	  }
 }

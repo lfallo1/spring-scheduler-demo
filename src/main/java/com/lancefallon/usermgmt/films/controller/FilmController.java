@@ -29,8 +29,8 @@ public class FilmController {
 	private FilmService filmService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Film>> findAllFilms(OAuth2Authentication auth){
-		CustomUserPasswordAuthenticationToken token = (CustomUserPasswordAuthenticationToken) auth.getUserAuthentication();
+	public ResponseEntity<List<Film>> findAllFilms(CustomUserPasswordAuthenticationToken token){
+//		CustomUserPasswordAuthenticationToken token = (CustomUserPasswordAuthenticationToken) auth.getUserAuthentication();
 		System.out.println(token.getUserPrivileges().getDefaultDB());
 		return new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
 	}

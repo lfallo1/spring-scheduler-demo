@@ -1,7 +1,7 @@
 <div style="background: #ccc;  padding: 24px; border-radius: 6px; width: 75%; margin: 10px auto; ">
   <div style="color: white; text-align: center">
-  #foreach($user in $emailConfig.users)
-    <div>Username: ${user.username}, email: ${user.email}</div>
+  #foreach($film in $emailConfig.films)
+    <div>Title: ${film.title}, genre: ${film.genre}</div>
     #end
   </div>
 </div>

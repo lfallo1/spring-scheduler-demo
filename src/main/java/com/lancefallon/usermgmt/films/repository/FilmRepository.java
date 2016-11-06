@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.users.repository;
+package com.lancefallon.usermgmt.films.repository;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -13,26 +13,26 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
-import com.lancefallon.usermgmt.users.model.User;
-import com.lancefallon.usermgmt.users.sql.UserSql;
+import com.lancefallon.usermgmt.films.model.Film;
+import com.lancefallon.usermgmt.films.sql.FilmSql;
 
 @Service
-public class UserRepository extends JdbcDaoSupport implements UserSql {
+public class FilmRepository extends JdbcDaoSupport implements FilmSql {
 	
-	public UserRepository(@Autowired @Qualifier("primary") DataSource dataSource) {
+	public FilmRepository(@Autowired @Qualifier("primary") DataSource dataSource) {
 		setDataSource(dataSource);
 	}
 
-	public Integer addUser(User user) {
+	public Integer addFilm(Film film) {
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		try{
 			getJdbcTemplate().update(connection -> {
-				PreparedStatement ps = connection.prepareStatement(USER_ADD_SQL,
-						new String[]{USER_COL_ID});
-				ps.setString(1, user.getUsername());
-				ps.setString(2, user.getEmail());
-				ps.setDate(3, new java.sql.Date(user.getDob().getTime()));
+				PreparedStatement ps = connection.prepareStatement(FILM_ADD_SQL,
+						new String[]{FILM_COL_ID});
+				ps.setString(1, film.getTitle());
+				ps.setString(2, film.getGenre());
+				ps.setDate(3, new java.sql.Date(film.getRelease().getTime()));
 				return ps;
 			}, keyHolder);
 	
@@ -43,13 +43,13 @@ public class UserRepository extends JdbcDaoSupport implements UserSql {
 		}
 	}
 
-	public List<User> findAll() {
-		return getJdbcTemplate().query(USER_FIND_ALL, USER_ROW_MAPPER);
+	public List<Film> findAll() {
+		return getJdbcTemplate().query(FILM_FIND_ALL, FILM_ROW_MAPPER);
 	}
 
-	public User findById(Integer id) {
+	public Film findById(Integer id) {
 		
-		return getJdbcTemplate().queryForObject(USER_FIND_BY_ID_SQL, new Object[]{ id }, USER_ROW_MAPPER);
+		return getJdbcTemplate().queryForObject(FILM_FIND_BY_ID_SQL, new Object[]{ id }, FILM_ROW_MAPPER);
 	}
 
 }

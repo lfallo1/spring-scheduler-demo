@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.users.controller;
+package com.lancefallon.usermgmt.films.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lancefallon.usermgmt.users.model.User;
-import com.lancefallon.usermgmt.users.service.UserService;
+import com.lancefallon.usermgmt.films.model.Film;
+import com.lancefallon.usermgmt.films.service.FilmService;
 
 /**
  * user api endpoint
@@ -20,24 +20,24 @@ import com.lancefallon.usermgmt.users.service.UserService;
  *
  */
 @RestController
-@RequestMapping("api/users")
-public class UserController {
+@RequestMapping("api/films")
+public class FilmController {
 
 	@Autowired
-	private UserService userService;
+	private FilmService filmService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<User>> findAllUsers(){
-		return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<Film>> findAllFilms(){
+		return new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{userId}", method=RequestMethod.GET)
-	public ResponseEntity<User> findAllUsers(@PathVariable Integer userId){
-		return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);
+	@RequestMapping(value="/{filmId}", method=RequestMethod.GET)
+	public ResponseEntity<Film> findAllFilms(@PathVariable Integer filmId){
+		return new ResponseEntity<>(filmService.findById(filmId), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/map", method=RequestMethod.GET)
 	public ResponseEntity<Map<Integer, String>> generateUserMap(){
-		return new ResponseEntity<>(userService.getUsersMap(), HttpStatus.OK);
+		return new ResponseEntity<>(filmService.getFilmsMap(), HttpStatus.OK);
 	}
 }

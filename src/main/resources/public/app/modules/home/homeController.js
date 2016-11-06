@@ -1,15 +1,15 @@
 angular.module("springDemoApp")
-        .controller("HomeCtrl", ["$rootScope", "$scope", "ApiService", "UserApiConstants", "$timeout", function ($rootScope, $scope, ApiService, UserApiConstants, $timeout) {
+        .controller("HomeCtrl", ["$rootScope", "$scope", "ApiService", "FilmApiConstants", "$timeout", function ($rootScope, $scope, ApiService, FilmApiConstants, $timeout) {
         	
-    		$scope.loadUsers = function(){
-    			ApiService.apiSendGet(UserApiConstants.USERS_FIND_ALL).then(function(data){
-            		$scope.users = data;
+    		$scope.loadFilms = function(){
+    			ApiService.apiSendGet(FilmApiConstants.FILMS_FIND_ALL).then(function(data){
+            		$scope.films = data;
             	});	
     		};
     		
     		var init = function(){
     			$rootScope.currentPage = "Home";
-    			$scope.loadUsers();
+    			$scope.loadFilms();
     		};
     		
     		init();

@@ -1,6 +1,7 @@
+<h3>Film list</h3>
 <ul class="list-group">
-	<li class="list-group-item" ng-repeat="user in users">
-		{{user.username}} - {{user.email}}
+	<li class="list-group-item" ng-repeat="film in films">
+		{{film.title}} - {{film.genre}}
 	</li>
 </ul>
-<div class="text-center btn-link" ng-click="loadUsers()">Reload</div>
+<div class="text-center btn-link" ng-click="loadFilms()">Reload</div>

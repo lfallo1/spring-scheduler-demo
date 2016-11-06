@@ -1,25 +1,25 @@
-package com.lancefallon.usermgmt.users.model;
+package com.lancefallon.usermgmt.films.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class Film implements Serializable {
 
 	private static final long serialVersionUID = -821977590418496382L;
 
 	private Integer id;
-	private String username;
-	private String email;
-	private Date dob;
+	private String title;
+	private String genre;
+	private Date release;
 
-	public User() {
+	public Film() {
 	}
 
-	public User(Integer id, String username, String email, Date dob) {
+	public Film(Integer id, String title, String genre, Date release) {
 		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.dob = dob;
+		this.title = title;
+		this.genre = genre;
+		this.release = release;
 	}
 
 	public Integer getId() {
@@ -30,28 +30,28 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getGenre() {
+		return genre;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
-	public Date getDob() {
-		return dob;
+	public Date getRelease() {
+		return release;
 	}
 
-	public void setDob(Date dob) {
-		this.dob = dob;
+	public void setRelease(Date release) {
+		this.release = release;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Film other = (Film) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -81,7 +81,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", dob=" + dob + "]";
+		return "Film [id=" + id + ", title=" + title + ", genre=" + genre + ", release=" + release + "]";
 	}
 
 }

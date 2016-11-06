@@ -19,6 +19,9 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ClientDetailsService clientService;
+	
+	@Autowired
+	CustomUserAuthenticationProvider customUserAuthenticationProvider;
 
 	@Autowired
 	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
@@ -26,6 +29,14 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
 				.password("admin123").roles("ADMIN");
 	}
 
+	/**
+	 * Validating credentials
+	 */
+	@Autowired
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(customUserAuthenticationProvider);
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 //		http.authorizeRequests().antMatchers("/index.html", "/home.html", "/")

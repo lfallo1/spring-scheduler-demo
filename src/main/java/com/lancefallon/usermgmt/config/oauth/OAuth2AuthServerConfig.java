@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
@@ -22,7 +23,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
  
 	@Autowired
 	private UserApprovalHandler handler;
- 
+
 	@Autowired
 	@Qualifier("authenticationManagerBean")
 	private AuthenticationManager authManager;
@@ -46,9 +47,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 				.authenticationManager(authManager);
 	}
  
-//	@Override
-//	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-//		oauthServer.realm(REALM+"/client");
-//	}
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+		oauthServer.realm(REALM+"/client");
+	}
  
 }

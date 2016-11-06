@@ -6,11 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lancefallon.usermgmt.config.oauth.CustomUserPasswordAuthenticationToken;
 import com.lancefallon.usermgmt.films.model.Film;
 import com.lancefallon.usermgmt.films.service.FilmService;
 
@@ -27,7 +29,9 @@ public class FilmController {
 	private FilmService filmService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Film>> findAllFilms(){
+	public ResponseEntity<List<Film>> findAllFilms(OAuth2Authentication auth){
+		CustomUserPasswordAuthenticationToken token = (CustomUserPasswordAuthenticationToken) auth.getUserAuthentication();
+		System.out.println(token.getUserPrivileges().getDefaultDB());
 		return new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
 	}
 	

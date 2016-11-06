@@ -1,7 +1,8 @@
 <h3>Film list</h3>
-<ul class="list-group">
+<ul ng-if="!filmApiError" class="list-group">
 	<li class="list-group-item" ng-repeat="film in films">
 		{{film.title}} - {{film.genre}}
 	</li>
 </ul>
+<div class="alert alert-danger" ng-if="filmApiError">Please <a href="#/login">login</a> to see the list of films</div>
 <div class="text-center btn-link" ng-click="loadFilms()">Reload</div>

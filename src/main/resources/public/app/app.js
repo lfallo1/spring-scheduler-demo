@@ -7,7 +7,7 @@ angular.module('springDemoApp', ['ngRoute'])
             $httpProvider.interceptors.push('httpRequestInterceptor');
 //            $httpProvider.defaults.useXDomain = true;
 //            delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        	
+            
             //setup routes
         	$routeProvider.
 	        	when('/', {
@@ -23,8 +23,9 @@ angular.module('springDemoApp', ['ngRoute'])
                 });
         	
         }])
-        .run(['$rootScope', function ($rootScope) {
+        .run(['$rootScope', '$http', function ($rootScope, $http) {
+        		$rootScope.authheader = {'Authorization' : btoa('trustedclient:secret')};
         	
-        		//TODO
+//        		$http.defaults.headers.common['Authorization'] = btoa('trustedclient:secret');
         		
             }]);

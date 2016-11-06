@@ -1,10 +1,11 @@
-angular.module('springDemoApp').controller('LoginCtrl', ['$q', '$http', '$scope', '$rootScope', 
-                                                         function($q, $http, $scope, $rootScope){
-
+angular.module('springDemoApp').controller('LoginCtrl', ['$q', '$http', '$scope', '$rootScope', "$location",
+                                                         function($q, $http, $scope, $rootScope, $location){
+	
 	$scope.login = function(){
-		var url = 'oauth/token?username=' + $scope.username + '&password=' + $scope.password + '&grant_type=password&client_secret=123456&client_id=' + 'sbg' + '&scope=read,write';
-		$http.post(url).then(function(res){
-			console.log(res.data)
+		var url = 'oauth/token?grant_type=password&username='+ $scope.username +'&password=' + $scope.password;
+		$http.post(url, $rootScope.authhheader).then(function(res){
+			$rootScope.authentication = res.data;
+			$location.path("/");
 		}, function(err){
 			console.log(err);
 		});

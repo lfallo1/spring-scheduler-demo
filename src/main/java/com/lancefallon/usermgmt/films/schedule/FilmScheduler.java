@@ -27,12 +27,12 @@ public class FilmScheduler {
 //	@Scheduled(cron = "0 48 13 * * *")
 	@Scheduled(fixedDelay = 15000, initialDelay=7000)
 	public void emailFilmReport() throws InterruptedException{
-		EmailConfigFilms config = new EmailConfigFilms();
-		config.setTo("fallon.lance@gmail.com");
-		config.setSubject("Nightly film report");
-		config.setTemplate("velocity/nightlyFilmSummary.vm");
-		config.setFilms(filmService.findAll());
-		emailService.sendMail(config);
+//		EmailConfigFilms config = new EmailConfigFilms();
+//		config.setTo("fallon.lance@gmail.com");
+//		config.setSubject("Nightly film report");
+//		config.setTemplate("velocity/nightlyFilmSummary.vm");
+//		config.setFilms(filmService.findAll());
+//		emailService.sendMail(config);
 	}
 	
 	/**
@@ -40,12 +40,12 @@ public class FilmScheduler {
 	 */
 	@Scheduled(fixedDelay = 60000*60, initialDelay=1000)
 	public void addDummyFilms() {
-		for(int i = 0; i < 50; i++){
-			String title = "johndoe_" + new Date().getTime();
-			Film film = new Film(null, title, "action", new Date());
-			Integer newFilmId = filmService.addFilm(film);
-			System.out.println("New film added: filmId#" + newFilmId);	
-		}
+//		for(int i = 0; i < 50; i++){
+//			String title = "johndoe_" + new Date().getTime();
+//			Film film = new Film(null, title, "action", new Date());
+//			Integer newFilmId = filmService.addFilm(film);
+//			System.out.println("New film added: filmId#" + newFilmId);	
+//		}
 	}
 	
 }

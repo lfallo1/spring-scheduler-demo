@@ -23,11 +23,11 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	CustomUserAuthenticationProvider customUserAuthenticationProvider;
 
-	@Autowired
-	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("javabycode").password("123456").roles("USER").and().withUser("admin")
-				.password("admin123").roles("ADMIN");
-	}
+//	@Autowired
+//	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication().withUser("javabycode").password("123456").roles("USER").and().withUser("admin")
+//				.password("admin123").roles("ADMIN");
+//	}
 
 	/**
 	 * Validating credentials

@@ -3,7 +3,7 @@ angular.module('springDemoApp').controller('LoginCtrl', ['$q', '$http', '$scope'
 	
 	$scope.login = function(){
 		var url = 'oauth/token?grant_type=password&username='+ $scope.username +'&password=' + $scope.password;
-		$http.post(url, {headers : $rootScope.authheader}).then(function(res){
+		$http({method: 'POST', url, headers : $rootScope.authheader}).then(function(res){
 			$rootScope.authentication = res.data;
 			$location.path("/");
 		}, function(err){

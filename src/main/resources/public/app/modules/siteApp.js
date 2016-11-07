@@ -1,4 +1,4 @@
-var siteModule = angular.module('siteConfig', ['ui.router']);
+var siteModule = angular.module('siteModule', ['ui.router']);
 
 siteModule.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider

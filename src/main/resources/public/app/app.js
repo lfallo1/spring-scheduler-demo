@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('springDemoApp', ['ui.router', 'siteConfig'])
+angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
         .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
         	//add an http request interceptor (userful for handling errors from server), or managing / monitoring api requests
@@ -37,9 +37,16 @@ angular.module('springDemoApp', ['ui.router', 'siteConfig'])
                 });
  
         }])
-        .run(['$rootScope', '$http', function ($rootScope, $http) {
+        .run(['$rootScope', 'ApiService', function ($rootScope, ApiService) {
         		$rootScope.authheader = {'Authorization' : 'Basic ' + btoa('trustedclient:secret')};
         	
+        		if(localStorage.getItem('authorization')){
+        			ApiService.apiSendGet('getuser/').then(function(res){
+        				$rootScope.user = res.data;
+        			});
+        			$rootScope.authenticated = true;
+        		}
+        		
 //        		$http.defaults.headers.common['Authorization'] = btoa('trustedclient:secret');
         		
             }]);

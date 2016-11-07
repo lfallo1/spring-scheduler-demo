@@ -28,8 +28,9 @@
 
 		service.apiSendGet = function(url){
 			var deferred = $q.defer();
-			if($rootScope.authentication){
-				$http.get(url + DbService.getDbKey() + "&access_token=" + $rootScope.authentication.access_token, $rootScope.authheader).then(function(res){
+			var token = localStorage.getItem('authorization')
+			if(token){
+				$http.get(url + DbService.getDbKey() + "&access_token=" + token, $rootScope.authheader).then(function(res){
 					deferred.resolve(res.data);
 				}, function(err){
 					deferred.reject(err);

@@ -24,7 +24,7 @@ angular.module('springDemoApp', ['ngRoute'])
         	
         }])
         .run(['$rootScope', '$http', function ($rootScope, $http) {
-        		$rootScope.authheader = {'Authorization' : btoa('trustedclient:secret')};
+        		$rootScope.authheader = {'Authorization' : 'Basic ' + btoa('trustedclient:secret')};
         	
 //        		$http.defaults.headers.common['Authorization'] = btoa('trustedclient:secret');
         		

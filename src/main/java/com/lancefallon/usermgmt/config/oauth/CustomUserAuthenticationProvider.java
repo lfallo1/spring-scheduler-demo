@@ -10,18 +10,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lancefallon.usermgmt.config.oauth.domain.UserPrivileges;
 
-/**
- * Custom User Authentication Provider class
- * 
- * @author Anjali
- *
- */
 @Component("customUserAuthenticationProvider")
 public class CustomUserAuthenticationProvider implements AuthenticationProvider {
 
@@ -38,7 +31,7 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 
 			final Object adUserName = authentication.getPrincipal();
 
-			// Check credentials in AD server
+			// Check credentials (for now just creating a bogus user privilege)
 			UserPrivileges user = new UserPrivileges();
 			user.setAuthenticated(true);
 			user.setDbList(Arrays.asList("default", "backup"));

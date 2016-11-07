@@ -39,8 +39,6 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/index.html", "/home.html", "/")
-//        .permitAll()
 		http.csrf().disable().authorizeRequests().antMatchers("/oauth/token", "/404.html", "/").permitAll();
 	}
 

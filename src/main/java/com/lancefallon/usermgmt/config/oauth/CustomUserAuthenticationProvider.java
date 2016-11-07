@@ -30,23 +30,25 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 		if (authentication != null) {
 
 			final Object adUserName = authentication.getPrincipal();
-
-			// Check credentials (for now just creating a bogus user privilege)
-			UserPrivileges user = new UserPrivileges();
-			user.setAuthenticated(true);
-			user.setDbList(Arrays.asList("default", "backup"));
-			user.setUserID(1);
-			user.setUserName(adUserName.toString());
-			user.setDefaultDB("default");
-			user.setPresentDB("default");
-
-			// Adding the response to auth
-			if (user.getUserID() != 0) {
-				final List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-				grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-				auth = new CustomUserPasswordAuthenticationToken(authentication.getPrincipal(),
-						authentication.getCredentials(), grantedAuthorities);
-				auth.setUserPrivileges(user);
+			
+			// should check credentials here (for now just creating a bogus rule)
+			if("lfallo1".equalsIgnoreCase(adUserName.toString())){				
+				UserPrivileges user = new UserPrivileges();
+				user.setAuthenticated(true);
+				user.setDbList(Arrays.asList("default", "backup"));
+				user.setUserID(1);
+				user.setUserName(adUserName.toString());
+				user.setDefaultDB("default");
+				user.setPresentDB("default");
+	
+				// Adding the response to auth
+				if (user.getUserID() != 0) {
+					final List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+					grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+					auth = new CustomUserPasswordAuthenticationToken(authentication.getPrincipal(),
+							authentication.getCredentials(), grantedAuthorities);
+					auth.setUserPrivileges(user);
+				}
 			}
 		}
 		

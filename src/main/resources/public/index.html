@@ -15,9 +15,8 @@
 </head>
 
 <body ng-app="springDemoApp">
-
-	<div ng-include="'app/shared/changeDb/changeDb.html'"></div>
-	<div ng-view class="container"></div>
+	
+	<div ui-view class="container"></div>
 	
 	<!-- jquery / bootstrap -->
 	<script src="bower/jquery/dist/jquery.js"></script>
@@ -27,14 +26,17 @@
 	<script src="bower/angular/angular.js"></script>
 	<script src="bower/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower/angular-route/angular-route.js"></script>
+	<script src="bower/angular-ui-router/release/angular-ui-router.js"></script>
 	
-	<!-- Angular -->
+	<!-- Angular Modules -->
+	<script src="app/modules/siteApp.js"></script>
 	<script src="app/app.js"></script>
 	
 	<!-- Controllers -->
 	<script src="app/modules/home/homeController.js"></script>
 	<script src="app/modules/login/loginController.js"></script>
 	<script src="app/shared/changeDb/changeDbController.js"></script>
+	<script src="app/shared/filmStatusTable/filmStatusTableController.js"></script>
 	
 	<!-- Config -->
 	<script src="app/config/httpRequestInterceptor.js"></script>

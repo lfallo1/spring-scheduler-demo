@@ -51,6 +51,10 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
                             }
                         }
                     }
+                })
+                .state('admin.mgmt', {
+                	url : "/mgmt",
+                	template : '<div class="alert alert-warning">Admin mgmt title</div>'
                 });
  
         }])

@@ -1,3 +1,7 @@
+<div ng-controller="StatusCtrl as status">
+	<button class="btn btn-{{v.style}}" ng-repeat="v in status.vals track by $index" ng-click="status.statusClick(v)">Message#{{$index}}</button>
+	<div class="alert alert-{{status.msg.style}}" ng-show="status.msg">{{status.msg.value}}</div>
+</div>
 <h3>Film list</h3>
 <ul ng-if="!filmApiError" class="list-group">
 	<li class="list-group-item" ng-repeat="film in films">

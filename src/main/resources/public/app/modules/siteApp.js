@@ -3,7 +3,7 @@ var siteModule = angular.module('siteModule', ['ui.router']);
 siteModule.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('site.home', { //child of site view, has two named views
-        	url : '/',        	
+        	url : '/home',        	
         	views : {
         		'' : {
         			templateUrl : 'app/modules/home/home.html',

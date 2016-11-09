@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +32,10 @@ public class FilmController {
 	private FilmService filmService;
 
 	@RequestMapping(method=RequestMethod.GET)
+	@Secured("ROLE_ADMIN")
 	public ResponseEntity<List<Film>> findAllFilms(){
-		return new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
+		ResponseEntity<List<Film>> response = new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
+		return response;
 	}
 	 
 	@RequestMapping(value="/auth/{username}", method=RequestMethod.GET)
@@ -43,13 +47,15 @@ public class FilmController {
 	}
 	
 	@RequestMapping(value="/{filmId}", method=RequestMethod.GET)
+	@PostAuthorize("returnObject.body.id < 2")
 	public ResponseEntity<Film> findAllFilms(@PathVariable Integer filmId){
 		return new ResponseEntity<>(filmService.findById(filmId), HttpStatus.OK);
 	}
 	
 	
 	@RequestMapping(value="/map", method=RequestMethod.GET)
-	public ResponseEntity<Map<Integer, String>> generateUserMap(){
+	@PostAuthorize("@authService.verifyMap(returnObject.body, #auth)")
+	public ResponseEntity<Map<Integer, String>> generateUserMap(OAuth2Authentication auth){
 		return new ResponseEntity<>(filmService.getFilmsMap(), HttpStatus.OK);
 	}
 }

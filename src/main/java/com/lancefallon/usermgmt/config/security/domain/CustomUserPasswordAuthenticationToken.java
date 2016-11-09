@@ -1,11 +1,9 @@
-package com.lancefallon.usermgmt.config.oauth;
+package com.lancefallon.usermgmt.config.security.domain;
 
 import java.util.Collection;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-
-import com.lancefallon.usermgmt.config.oauth.domain.UserPrivileges;
 
 /**
  * Custom User Password Authentication Token class

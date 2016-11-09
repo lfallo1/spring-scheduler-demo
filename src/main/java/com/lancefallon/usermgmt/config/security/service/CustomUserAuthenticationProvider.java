@@ -1,22 +1,21 @@
-package com.lancefallon.usermgmt.config.oauth;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+package com.lancefallon.usermgmt.config.security.service;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lancefallon.usermgmt.config.oauth.domain.UserPrivileges;
+import com.lancefallon.usermgmt.config.security.domain.CustomUserPasswordAuthenticationToken;
+import com.lancefallon.usermgmt.config.security.domain.UserPrivileges;
 
 @Component("customUserAuthenticationProvider")
 public class CustomUserAuthenticationProvider implements AuthenticationProvider {
+	
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
 
 	private static final Logger LOGGER = Logger.getLogger(CustomUserAuthenticationProvider.class);
 
@@ -29,24 +28,17 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 		CustomUserPasswordAuthenticationToken auth = null;
 		if (authentication != null) {
 
-			final Object adUserName = authentication.getPrincipal();
+			final Object username = authentication.getPrincipal();
+			final Object password = authentication.getCredentials();
 			
 			// should check credentials here (for now just creating a bogus rule)
-			if("lfallo1".equalsIgnoreCase(adUserName.toString())){				
-				UserPrivileges user = new UserPrivileges();
-				user.setAuthenticated(true);
-				user.setDbList(Arrays.asList("default", "backup"));
-				user.setUserID(1);
-				user.setUserName(adUserName.toString());
-				user.setDefaultDB("default");
-				user.setPresentDB("default");
+			if(username != null){				
+				UserPrivileges user = (UserPrivileges) userDetailsService.loadUserByUsername(username.toString());
 	
 				// Adding the response to auth
 				if (user.getUserID() != 0) {
-					final List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-					grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 					auth = new CustomUserPasswordAuthenticationToken(authentication.getPrincipal(),
-							authentication.getCredentials(), grantedAuthorities);
+							authentication.getCredentials(), user.getAuthorities());
 					auth.setUserPrivileges(user);
 				}
 			}

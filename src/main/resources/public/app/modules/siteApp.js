@@ -2,7 +2,7 @@ var siteModule = angular.module('siteModule', ['ui.router']);
 
 siteModule.config(function ($stateProvider, $urlRouterProvider, $controllerProvider) {
 	
-	$controllerProvider.register('StatusCtrl', function ($scope, $timeout) {l
+	$controllerProvider.register('StatusCtrl', function ($scope, $timeout) {
 		var self = this;
         self.vals = [{value: 'Once upon a time', style:'success'},
         	{value: 'Dogs and cats dont feed the turtle', style:'primary'},

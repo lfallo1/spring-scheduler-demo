@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.config.exception.domain;
+package com.lancefallon.usermgmt.config.exception.model;
 
 public class InvalidCredentialsException extends AbstractException {
     private static final long serialVersionUID = 1L;

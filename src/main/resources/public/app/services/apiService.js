@@ -30,7 +30,8 @@
 			var deferred = $q.defer();
 			var token = localStorage.getItem('authorization')
 			if(token){
-				$http.get(url + DbService.getDbKey() + "&access_token=" + token, $rootScope.authheader).then(function(res){
+				var headers = {headers : {'Authorization' : 'Bearer ' + token}}
+				$http.get(url + DbService.getDbKey(), headers).then(function(res){
 					deferred.resolve(res.data);
 				}, function(err){
 					deferred.reject(err);

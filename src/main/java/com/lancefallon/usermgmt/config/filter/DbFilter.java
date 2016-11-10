@@ -10,8 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lancefallon.usermgmt.config.db.domain.DbContextHolder;
-import com.lancefallon.usermgmt.config.db.domain.DbType;
+import com.lancefallon.usermgmt.config.dbrouting.domain.DbContextHolder;
+import com.lancefallon.usermgmt.config.dbrouting.domain.DbType;
 
 public class DbFilter implements Filter {
 	private static final String RESPONSE_HEADER_EXPIRES = "Expires";

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lancefallon.usermgmt.config.security.domain;
+package com.lancefallon.usermgmt.config.security.model;
 
 import java.io.Serializable;
 import java.util.Collection;

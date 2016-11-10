@@ -16,7 +16,7 @@
 
 <body ng-app="springDemoApp">
 	
-	<h4>I'm always here</h4>
+	<h4>{{user ? 'Hello there, ' + user.username : 'You are not logged in'}}</h4>
 	<div ui-view class="container"></div>
 	
 	<!-- jquery / bootstrap -->

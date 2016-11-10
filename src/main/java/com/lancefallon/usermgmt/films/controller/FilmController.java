@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lancefallon.usermgmt.config.security.domain.CustomUserPasswordAuthenticationToken;
+import com.lancefallon.usermgmt.config.security.model.CustomUserPasswordAuthenticationToken;
 import com.lancefallon.usermgmt.films.model.Film;
 import com.lancefallon.usermgmt.films.service.FilmService;
 
@@ -32,14 +32,13 @@ public class FilmController {
 	private FilmService filmService;
 
 	@RequestMapping(method=RequestMethod.GET)
-	@Secured("ROLE_ADMIN")
 	public ResponseEntity<List<Film>> findAllFilms(){
 		ResponseEntity<List<Film>> response = new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
 		return response;
 	}
 	 
 	@RequestMapping(value="/auth/{username}", method=RequestMethod.GET)
-	@PreAuthorize("hasRole('ROLE_ADMIN') and @authService.isSelf(#auth, #username)")
+	@PreAuthorize("hasRole('ROLE_USER') and @authService.isSelf(#auth, #username)")
 	public ResponseEntity<List<Film>> findAllFilmsAuth(OAuth2Authentication auth, @PathVariable String username){
 		CustomUserPasswordAuthenticationToken token = (CustomUserPasswordAuthenticationToken) auth.getUserAuthentication();
 		System.out.println(token.getUserPrivileges().getDefaultDB());
@@ -47,6 +46,7 @@ public class FilmController {
 	}
 	
 	@RequestMapping(value="/{filmId}", method=RequestMethod.GET)
+	@Secured("ROLE_ADMIN")
 	@PostAuthorize("returnObject.body.id < 2")
 	public ResponseEntity<Film> findAllFilms(@PathVariable Integer filmId){
 		return new ResponseEntity<>(filmService.findById(filmId), HttpStatus.OK);

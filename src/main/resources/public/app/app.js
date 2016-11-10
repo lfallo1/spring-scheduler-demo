@@ -59,15 +59,13 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
  
         }])
         .run(['$rootScope', 'ApiService', function ($rootScope, ApiService) {
-        		$rootScope.authheader = {'Authorization' : 'Basic ' + btoa('trustedclient:secret')};
+        		$rootScope.clientAuthHeader = {headers : {'Authorization' : 'Basic ' + btoa('trustedclient:secret')}};
         	
         		if(localStorage.getItem('authorization')){
-        			ApiService.apiSendGet('getuser/').then(function(res){
-        				$rootScope.user = res.data;
+        			ApiService.apiSendGet('getuser').then(function(res){
+        				$rootScope.user = res;
         			});
         			$rootScope.authenticated = true;
         		}
-        		
-//        		$http.defaults.headers.common['Authorization'] = btoa('trustedclient:secret');
         		
             }]);

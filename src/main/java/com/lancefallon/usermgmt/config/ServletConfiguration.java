@@ -25,10 +25,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactory;
 
-import com.lancefallon.usermgmt.config.db.domain.DbType;
-import com.lancefallon.usermgmt.config.db.service.DbRoutingDataSourceUtil;
-import com.lancefallon.usermgmt.config.domain.AppProperties;
+import com.lancefallon.usermgmt.config.dbrouting.domain.DbType;
+import com.lancefallon.usermgmt.config.dbrouting.service.DbRoutingDataSourceUtil;
 import com.lancefallon.usermgmt.config.filter.DbFilter;
+import com.lancefallon.usermgmt.config.model.AppProperties;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**

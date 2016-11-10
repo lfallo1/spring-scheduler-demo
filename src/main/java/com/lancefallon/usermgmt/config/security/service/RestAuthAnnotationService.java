@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 
-import com.lancefallon.usermgmt.config.security.domain.CustomUserPasswordAuthenticationToken;
+import com.lancefallon.usermgmt.config.security.model.CustomUserPasswordAuthenticationToken;
 
 @Component("authService")
 public class RestAuthAnnotationService {

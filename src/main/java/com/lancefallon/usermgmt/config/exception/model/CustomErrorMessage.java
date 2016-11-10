@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.config.exception.domain;
+package com.lancefallon.usermgmt.config.exception.model;
 
 public class CustomErrorMessage {
 	private String key;

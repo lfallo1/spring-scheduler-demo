@@ -3,10 +3,14 @@ angular.module('springDemoApp').controller('LoginCtrl', ['$q', '$http', '$scope'
 	
 	$scope.login = function(){
 		var url = 'oauth/token?grant_type=password&username='+ $scope.username +'&password=' + $scope.password;
-		$http({method: 'POST', url, headers : $rootScope.authheader}).then(function(res){
+		$http.post(url, $rootScope.clientAuthHeader).then(function(res){
 			localStorage.setItem("authorization", res.data.access_token);
 			$rootScope.authentication = true;
-			$location.path("/");
+			ApiService.apiSendGet('getuser').then(function(res){
+				$rootScope.user = res;
+				$location.path("/");
+			});
+			
 		}, function(err){
 			console.log(err);
 		});

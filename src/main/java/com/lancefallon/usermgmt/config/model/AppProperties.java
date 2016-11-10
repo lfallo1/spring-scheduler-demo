@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.config.domain;
+package com.lancefallon.usermgmt.config.model;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

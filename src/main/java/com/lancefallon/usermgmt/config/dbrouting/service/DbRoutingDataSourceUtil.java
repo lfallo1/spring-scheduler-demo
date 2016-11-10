@@ -1,8 +1,8 @@
-package com.lancefallon.usermgmt.config.db.service;
+package com.lancefallon.usermgmt.config.dbrouting.service;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
-import com.lancefallon.usermgmt.config.db.domain.DbContextHolder;
+import com.lancefallon.usermgmt.config.dbrouting.domain.DbContextHolder;
 
 public class DbRoutingDataSourceUtil extends AbstractRoutingDataSource {
 

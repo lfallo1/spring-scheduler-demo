@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.lancefallon.usermgmt.config.exception.domain.CustomErrorMessage;
-import com.lancefallon.usermgmt.config.exception.domain.InvalidCredentialsException;
+import com.lancefallon.usermgmt.config.exception.model.CustomErrorMessage;
+import com.lancefallon.usermgmt.config.exception.model.InvalidCredentialsException;
 
 /**
  * global error handler / response generator

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.lancefallon.usermgmt.config.security.domain.UserPrivileges;
+import com.lancefallon.usermgmt.config.security.model.UserPrivileges;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

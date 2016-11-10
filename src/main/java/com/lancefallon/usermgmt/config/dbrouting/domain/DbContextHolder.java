@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.config.db.domain;
+package com.lancefallon.usermgmt.config.dbrouting.domain;
 
 public class DbContextHolder {
 

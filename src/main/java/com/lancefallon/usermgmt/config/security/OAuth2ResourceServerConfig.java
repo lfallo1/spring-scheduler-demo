@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.lancefallon.usermgmt.config.security.service.CustomUserAuthenticationProvider;
 
@@ -18,7 +19,10 @@ import com.lancefallon.usermgmt.config.security.service.CustomUserAuthentication
 public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
-	CustomUserAuthenticationProvider customUserAuthenticationProvider;
+	private CustomUserAuthenticationProvider customUserAuthenticationProvider;
+	
+	@Autowired
+	private LogoutSuccessHandler logoutHandler;
 
 	/**
 	 * Add resource-server specific properties (like a resource id). The defaults should work for many applications, but
@@ -45,7 +49,8 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 		http.authorizeRequests()
 			.antMatchers("/", "/app/**", "/bower/**").permitAll()
 			.anyRequest().authenticated().and()
-			.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+			.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler()).and()
+			.logout().logoutSuccessHandler(logoutHandler);
 	}
 
 }

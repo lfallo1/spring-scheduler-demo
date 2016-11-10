@@ -1,6 +1,7 @@
 package com.lancefallon.usermgmt.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -86,6 +87,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 	//token stores
 	
 	@Bean
+	@Qualifier("inMemoryTokenStore")
 	public TokenStore tokenStore(){
 		return new InMemoryTokenStore();
 	}

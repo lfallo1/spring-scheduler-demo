@@ -58,7 +58,7 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
                 });
  
         }])
-        .run(['$rootScope', 'ApiService', function ($rootScope, ApiService) {
+        .run(['$rootScope', 'ApiService', '$state', '$http', function ($rootScope, ApiService, $state, $http) {
         		$rootScope.clientAuthHeader = {headers : {'Authorization' : 'Basic ' + btoa('trustedclient:secret')}};
         	
         		if(localStorage.getItem('authorization')){
@@ -67,5 +67,14 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
         			});
         			$rootScope.authenticated = true;
         		}
+        		
+        		$rootScope.logout = function(){
+        			$http.post("logout", {headers : {Authorization : 'Bearer ' + localStorage.getItem("authorization")}}).then(function(){
+        				$rootScope.user = undefined;
+        				$rootScope.authentication = false;
+        				localStorage.removeItem('authorization');
+        				$state.go('site.home');
+        			})
+        		};
         		
             }]);

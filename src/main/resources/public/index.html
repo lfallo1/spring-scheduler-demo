@@ -17,6 +17,7 @@
 <body ng-app="springDemoApp">
 	
 	<h4>{{user ? 'Hello there, ' + user.username : 'You are not logged in'}}</h4>
+	<button ng-show="user" ng-click="logout()">logout</button>
 	<div ui-view class="container"></div>
 	
 	<!-- jquery / bootstrap -->

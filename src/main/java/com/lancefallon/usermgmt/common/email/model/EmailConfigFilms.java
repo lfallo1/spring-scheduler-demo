@@ -1,4 +1,4 @@
-package com.lancefallon.usermgmt.common.email.domain;
+package com.lancefallon.usermgmt.common.email.model;
 
 import java.util.List;
 

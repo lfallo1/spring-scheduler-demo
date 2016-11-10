@@ -13,7 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import com.lancefallon.usermgmt.common.email.domain.EmailConfig;
+import com.lancefallon.usermgmt.common.email.model.EmailConfig;
 
 @Service
 public class EmailService<T extends EmailConfig> {

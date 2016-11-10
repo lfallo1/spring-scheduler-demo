@@ -1,24 +1,16 @@
 package com.lancefallon.usermgmt.films.schedule;
 
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import com.lancefallon.usermgmt.common.email.domain.EmailConfigFilms;
-import com.lancefallon.usermgmt.common.email.service.EmailService;
-import com.lancefallon.usermgmt.films.model.Film;
-import com.lancefallon.usermgmt.films.service.FilmService;
 
 @Component
 public class FilmScheduler {
 	
-	@Autowired
-	private FilmService filmService;
-	
-	@Autowired
-	private EmailService<EmailConfigFilms> emailService;
+//	@Autowired
+//	private FilmService filmService;
+//	
+//	@Autowired
+//	private EmailService<EmailConfigFilms> emailService;
 	
 	/**
 	 * run every day at 13:48:00

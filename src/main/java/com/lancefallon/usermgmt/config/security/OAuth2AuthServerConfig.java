@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
@@ -38,6 +39,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 	
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
+	
+	@Autowired
+	private TokenEnhancer tokenEnhancer;
  
 	//auth server config
 	
@@ -79,15 +83,14 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		
-		//add custom token enhancer to add additional properties to the response token
-		
-		endpoints.tokenStore(tokenStore).userApprovalHandler(handler)
-				.userDetailsService(userDetailsService)
-				.authenticationManager(authenticationManagerBean);
+		endpoints.tokenStore(tokenStore)
+			.tokenEnhancer(tokenEnhancer)
+			.userApprovalHandler(handler)
+			.userDetailsService(userDetailsService)
+			.authenticationManager(authenticationManagerBean);
 	}
 	
-	//token stores
+	//token store
 	
 	@Bean
 	@Qualifier("inMemoryTokenStore")

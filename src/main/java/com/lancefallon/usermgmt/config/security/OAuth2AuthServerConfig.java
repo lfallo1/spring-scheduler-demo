@@ -79,6 +79,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		
+		//add custom token enhancer to add additional properties to the response token
+		
 		endpoints.tokenStore(tokenStore).userApprovalHandler(handler)
 				.userDetailsService(userDetailsService)
 				.authenticationManager(authenticationManagerBean);

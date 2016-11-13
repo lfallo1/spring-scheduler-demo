@@ -2,7 +2,6 @@ package com.lancefallon.usermgmt.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -11,30 +10,13 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import com.lancefallon.usermgmt.config.security.service.CustomUserAuthenticationProvider;
-
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @EnableResourceServer
 public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
-
-	@Autowired
-	private CustomUserAuthenticationProvider customUserAuthenticationProvider;
 	
 	@Autowired
 	private LogoutSuccessHandler logoutHandler;
-
-	/**
-	 * Add resource-server specific properties (like a resource id). The defaults should work for many applications, but
-	 * you might want to change at least the resource id.
-	 * 
-	 * @param resources configurer for the resource server
-	 * @throws Exception if there is a problem
-	 */
-	@Autowired
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(customUserAuthenticationProvider);
-	}
 
 	/**
 	 * Use this to configure the access rules for secure resources. By default all resources <i>not</i> in "/oauth/**"

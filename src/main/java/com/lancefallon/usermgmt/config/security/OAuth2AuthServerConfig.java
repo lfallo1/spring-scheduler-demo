@@ -58,7 +58,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 //        .accessTokenValiditySeconds(120)
 //        .refreshTokenValiditySeconds(600);
 		
-		//-- PASSWORD --
+		//-- RESOURCE OWNER PASSWORD FLOW --
 		clients.inMemory()
         .withClient("trustedclient")
         .authorizedGrantTypes("password", "refresh_token")
@@ -68,16 +68,6 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
         .accessTokenValiditySeconds(120)
         .refreshTokenValiditySeconds(600);
 
-		//-- IMPLICIT -- This is isnt working, could be causing havoc since its on 
-//		clients.inMemory()
-//        .withClient("trustedclient")
-//        .redirectUris("http://localhost:8080/#/site/home")
-//        .authorizedGrantTypes("implicit", "refresh_token")
-//        .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-//        .scopes("read", "write", "trust")
-//        .secret("secret")
-//        .accessTokenValiditySeconds(120)
-//        .refreshTokenValiditySeconds(600);
 	}
 	
 	

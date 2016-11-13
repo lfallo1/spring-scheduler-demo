@@ -21,7 +21,7 @@ public class LdapService {
 	
 	private static final String BASE_DN = "ou=patrons,dc=inflinx,dc=com"; //specify the base distinguished name (dn)
 	
-//	@Autowired
+	@Autowired
 	private LdapTemplate ldapTemplate;
 	
 	/**

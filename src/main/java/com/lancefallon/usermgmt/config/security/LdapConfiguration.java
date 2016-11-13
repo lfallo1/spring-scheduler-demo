@@ -13,7 +13,7 @@ import org.springframework.ldap.core.support.LdapContextSource;
 @Configuration
 public class LdapConfiguration {
 
-//    @Bean
+    @Bean
     public LdapContextSource contextSource () {
         LdapContextSource contextSource= new LdapContextSource();
         contextSource.setUrl("ldap://localhost:10389");
@@ -23,7 +23,7 @@ public class LdapConfiguration {
         return contextSource;
     }
 
-//    @Bean
+    @Bean
     public LdapTemplate ldapTemplate() {
     	LdapTemplate template = new LdapTemplate(contextSource());
     	return template;

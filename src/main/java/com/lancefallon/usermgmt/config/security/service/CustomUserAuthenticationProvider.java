@@ -45,13 +45,13 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 			final Object password = authentication.getCredentials();
 			
 			//try to retrieve user by username/pwd, and also email/pwd
-//			DirContext ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "uid");
-//			if(ctx == null){
-//				ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "mail");
-//				if(ctx == null){
-//					return null;
-//				}
-//			}
+			DirContext ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "uid");
+			if(ctx == null){
+				ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "mail");
+				if(ctx == null){
+					return null;
+				}
+			}
 			
 			//if a result was returned, check application's db for the user
 			UserPrivileges user = (UserPrivileges) userDetailsService.loadUserByUsername(username.toString());

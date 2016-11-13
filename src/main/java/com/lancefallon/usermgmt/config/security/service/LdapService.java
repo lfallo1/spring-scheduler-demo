@@ -4,24 +4,22 @@ import javax.naming.InvalidNameException;
 import javax.naming.directory.DirContext;
 import javax.naming.ldap.LdapName;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.NamingException;
 import org.springframework.ldap.core.ContextSource;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapNameBuilder;
-import org.springframework.stereotype.Service;
 
 /**
  * interact with ldap server
  * @author lancefallon
  *
  */
-@Service
+//@Service
 public class LdapService {
 	
 	private static final String BASE_DN = "ou=patrons,dc=inflinx,dc=com"; //specify the base distinguished name (dn)
 	
-	@Autowired
+//	@Autowired
 	private LdapTemplate ldapTemplate;
 	
 	/**

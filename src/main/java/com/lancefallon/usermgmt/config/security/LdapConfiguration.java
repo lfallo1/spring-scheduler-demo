@@ -1,7 +1,5 @@
 package com.lancefallon.usermgmt.config.security;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.LdapContextSource;
 
@@ -10,10 +8,10 @@ import org.springframework.ldap.core.support.LdapContextSource;
  * @author lancefallon
  *
  */
-@Configuration
+//@Configuration
 public class LdapConfiguration {
 
-    @Bean
+//    @Bean
     public LdapContextSource contextSource () {
         LdapContextSource contextSource= new LdapContextSource();
         contextSource.setUrl("ldap://localhost:10389");
@@ -23,7 +21,7 @@ public class LdapConfiguration {
         return contextSource;
     }
 
-    @Bean
+//    @Bean
     public LdapTemplate ldapTemplate() {
     	LdapTemplate template = new LdapTemplate(contextSource());
     	return template;

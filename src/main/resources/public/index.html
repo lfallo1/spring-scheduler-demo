@@ -16,8 +16,7 @@
 
 <body ng-app="springDemoApp">
 	
-	<h4>{{user ? 'Hello there, ' + user.username : 'You are not logged in'}}</h4>
-	<button ng-show="user" ng-click="logout()">logout</button>
+	<h4>Current page: {{currentPage}}</h4>
 	<div ui-view class="container"></div>
 	
 	<!-- jquery / bootstrap -->
@@ -32,25 +31,15 @@
 	<script src="bower/a0-angular-storage/dist/angular-storage.js"></script>
 	
 	<!-- Angular Modules -->
-	<script src="app/modules/siteApp.js"></script>
 	<script src="app/app.js"></script>
 	
 	<!-- Controllers -->
-	<script src="app/modules/home/homeController.js"></script>
-	<script src="app/modules/login/loginController.js"></script>
-	<script src="app/modules/admin/adminController.js"></script>
-	<script src="app/shared/changeDb/changeDbController.js"></script>
-	<script src="app/shared/filmStatusTable/filmStatusTableController.js"></script>
+	<script src="app/modules/siteController.js"></script>
 	
 	<!-- Config -->
 	<script src="app/config/httpRequestInterceptor.js"></script>
 	
 	<!-- Constants -->
-	<script src="app/constants/filmApiConstants.js"></script>
 	<script src="app/constants/dbConstants.js"></script>
-	
-	<!-- Services -->
-	<script src="app/services/dbService.js"></script>
-	<script src="app/services/apiService.js"></script>
 </body>
 </html>

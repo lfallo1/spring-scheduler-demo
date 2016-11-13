@@ -16,7 +16,7 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
 	                    	templateUrl : 'app/modules/site.html'
 	                    },
 	                    
-	                    // shared views on the site page
+	                    // named view on the 'site' state
 	                    'changedb@site': {
 	                        templateUrl: 'app/shared/changeDb/changeDb.html',
 	                        controller: 'ChangeDbCtrl'
@@ -26,6 +26,7 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
 	            .state('admin', {//State demonstrating Multiple,named views
                     url: "/admin/:username",                    
                     resolve: {
+                    	// resolve example that sets a users array
                     	users : function($http, $q, $state){
                             var deferred = $q.defer();
                             $http.get('https://jsonplaceholder.typicode.com/users').then(function(res){
@@ -39,10 +40,12 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
                     	}
                     },
                     views: {
+                    	/* default view for the state 'admin' (admin/:username) */
                         ""  : { 
                         	templateUrl: "app/modules/admin/admin.html",
                         	controller: "AdminCtrl"
                         },
+                        /* two named views */
                         "portal@admin": { template: "Write whatever you want, it's your virtual admin portal." },
                         "software@admin": { 
                         	templateUrl: "app/modules/admin/admin.software.html" ,                        
@@ -53,7 +56,7 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
                     }
                 })
                 .state('admin.mgmt', {
-                	url : "/mgmt",
+                	url : "/mgmt", /* admin/:username/mgmt */
                 	template : '<div class="alert alert-warning">Admin mgmt title</div>'
                 });
  

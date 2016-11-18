@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('springDemoApp', ['ngRoute'])
+angular.module('springDemoApp', ['ngRoute', 'ngDraggable', 'toaster', 'ngAnimate'])
         .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
         	//add an http request interceptor (userful for handling errors from server), or managing / monitoring api requests
@@ -23,8 +23,10 @@ angular.module('springDemoApp', ['ngRoute'])
                 });
         	
         }])
-        .run(['$rootScope', function ($rootScope) {
+        .run(['$rootScope', 'MessageService', function ($rootScope, MessageService) {
         	
-        		//TODO
+        		//declare the toaster configurations
+        		$rootScope.stickyToasterOptions = MessageService.getStickyToasterOptions();
+        		$rootScope.generalToasterOptions = MessageService.getGeneralToasterOptions();
         		
             }]);

@@ -11,6 +11,10 @@
 <!-- css dependencies -->
 <link href="bower/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="bower/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet" type="text/css" />
+<link href="bower/angularjs-toaster/toaster.css" rel="stylesheet" type="text/css" />
+
+<!-- stylesheets -->
+<link href="app/css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -18,6 +22,10 @@
 
 	<div ng-include="'app/shared/changeDb/changeDb.html'"></div>
 	<div ng-view class="container"></div>
+	
+	<!-- define toasters here -->
+	<toaster-container toaster-options="stickyToasterOptions"></toaster-container>
+	<toaster-container toaster-options="generalToasterOptions"></toaster-container>
 	
 	<!-- jquery / bootstrap -->
 	<script src="bower/jquery/dist/jquery.js"></script>
@@ -27,6 +35,9 @@
 	<script src="bower/angular/angular.js"></script>
 	<script src="bower/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower/angular-route/angular-route.js"></script>
+	<script src="bower/ngDraggable/ngDraggable.js"></script>
+	<script src="bower/angular-animate/angular-animate.js"></script>	
+	<script src="bower/angularjs-toaster/toaster.js"></script>
 	
 	<!-- Angular -->
 	<script src="app/app.js"></script>
@@ -41,9 +52,11 @@
 	<!-- Constants -->
 	<script src="app/constants/userApiConstants.js"></script>
 	<script src="app/constants/dbConstants.js"></script>
+	<script src="app/constants/toasterConstants.js"></script>
 	
 	<!-- Services -->
 	<script src="app/services/dbService.js"></script>
 	<script src="app/services/apiService.js"></script>
+	<script src="app/services/messageService.js"></script>
 </body>
 </html>

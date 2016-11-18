@@ -1,0 +1,33 @@
+.drag-item{
+    background: #eee;
+    margin-top: 15px;
+    margin-left: 12px;
+    border-radius: 8px;
+}
+
+.dragging{
+    background: red;
+}
+
+.drag-item-content{
+    font-weight: bolder;
+        padding: 30px;
+}
+
+.drag-item-drag-area{
+    font-style: italic;
+    text-align: center;
+}
+
+.drag-item-drag-area:hover{
+    cursor: move;
+    opacity: 0.7;
+}
+
+.drag-item-content:hover{
+    cursor: pointer;
+}
+
+#toast-container.toast-top-full-width > div{
+    width: 100%;
+}

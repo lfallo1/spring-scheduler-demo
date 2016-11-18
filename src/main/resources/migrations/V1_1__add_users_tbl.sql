@@ -13,4 +13,4 @@ WITH (
 );
 
 INSERT INTO "user"(username, email, dob)
-    VALUES ('lfallo1', 'lance@gmail.com', '1986-10-12'),('kara023', 'kara@gmail.com', '1990-2-18');
+    VALUES ('lfallo1', 'lance@gmail.com', '1986-10-12'),('kara023', 'kara@gmail.com', '1990-2-18'),('bob998', 'bob@gmail.com', '1980-5-18'),('george109', 'george109@gmail.com', '1968-8-13'),('harry2923', 'harry3234@gmail.com', '1995-5-28');

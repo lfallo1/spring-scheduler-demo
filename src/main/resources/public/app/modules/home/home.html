@@ -1,6 +1,9 @@
-<ul class="list-group">
-	<li class="list-group-item" ng-repeat="user in users">
-		{{user.username}} - {{user.email}}
-	</li>
-</ul>
-<div class="text-center btn-link" ng-click="loadUsers()">Reload</div>
+<div class="container">
+	<div class="col-md-4" ng-repeat="user in users" ng-drop="true" ng-drop-success="onDropComplete($index,$data,$event,obj,item)">
+		<div ng-drag="true" ng-drag-scroll ng-drag-data="user" class="drag-item"> 
+			<div class="drag-item-drag-area">Click here  to drag</div>
+			<div ng-click="onUserClick(user)" class="drag-item-content">{{user.username}} - {{user.email}}</div>
+		</div>
+	</div>
+	<div class="text-center btn-link" ng-click="loadUsers()">Reload</div>
+</div>

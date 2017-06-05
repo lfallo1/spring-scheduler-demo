@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan(basePackages="com.lancefallon.usermgmt")
+@ComponentScan(basePackages="com.lancefallon.springstarter")
 public class SpringBootStarterDemoApplication {
 
 	public static void main(String[] args) {

@@ -1,7 +1,5 @@
 package com.lancefallon.springstarter.config.security.service;
 
-import javax.naming.directory.DirContext;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -24,8 +22,8 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
 	
-	@Autowired
-	private LdapService ldapService;
+//	@Autowired
+//	private LdapService ldapService;
 
 	private static final Logger LOGGER = Logger.getLogger(CustomUserAuthenticationProvider.class);
 
@@ -44,14 +42,14 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 			final Object username = authentication.getPrincipal();
 			final Object password = authentication.getCredentials();
 			
-			//try to retrieve user by username/pwd, and also email/pwd
-			DirContext ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "uid");
-			if(ctx == null){
-				ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "mail");
-				if(ctx == null){
-					return null;
-				}
-			}
+//			//try to retrieve user by username/pwd, and also email/pwd
+//			DirContext ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "uid");
+//			if(ctx == null){
+//				ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "mail");
+//				if(ctx == null){
+//					return null;
+//				}
+//			}
 			
 			//if a result was returned, check application's db for the user
 			UserPrivileges user = (UserPrivileges) userDetailsService.loadUserByUsername(username.toString());

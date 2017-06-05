@@ -45,7 +45,7 @@ public class ServletConfiguration implements EmbeddedServletContainerCustomizer 
 	private AppProperties appConfig;
 
 	public DataSource getDefaultDataSource() {
-
+	
 		/**
 		 * primary datasource
 		 */

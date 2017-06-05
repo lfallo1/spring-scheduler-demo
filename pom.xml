@@ -3,25 +3,31 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.lancefallon.usermgmt</groupId>
-	<artifactId>spring-scheduler-demo</artifactId>
+	<groupId>com.lancefallon.springbootstarter</groupId>
+	<artifactId>spring-boot-starter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
-	<name>cron-demo</name>
+	<name>spring-boot-starter</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.1.RELEASE</version>
+		<version>1.4.2.RELEASE</version>
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<start-class>com.lancefallon.usermgmt.CronDemoApplication</start-class>
+		<start-class>com.lancefallon.springstarter.SpringBootStarterDemoApplication</start-class>
+
+		<!--set this to your docker acct name -->
+		<docker.image.prefix>lfallo1</docker.image.prefix>
+
+		<!--Set to name of project -->
+		<docker.image.name>springbootstarter</docker.image.name>
 	</properties>
 
 	<dependencies>
@@ -36,7 +42,7 @@
 					<groupId>ch.qos.logback</groupId>
 					<artifactId>logback-classic</artifactId>
 				</exclusion>
-			</exclusions>			
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -143,13 +149,12 @@
 
 		<!--JMS Dep -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-all</artifactId>
-			<version>5.14.5</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -164,7 +169,98 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.11.v20150529</version>
 			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.20.0</version>
+
+				<configuration>
+
+					<dockerHost>http://127.0.0.1:2375</dockerHost>
+					<!-- <dockerHost>unix:///var/run/docker.sock</dockerHost> -->
+
+					<verbose>true</verbose>
+					<images>
+						<image>
+							<name>${docker.image.prefix}/${docker.image.name}</name>
+							<build>
+								<dockerFileDir>${project.basedir}/target/dockerfile/</dockerFileDir>
+
+								<!--copies artficact to docker build dir in target -->
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+								<tags>
+									<tag>latest</tag>
+									<tag>${project.version}</tag>
+								</tags>
+							</build>
+							<run>
+								<ports>
+									<port>8080:8080</port>
+								</ports>
+								<links>
+									<link>myrabbitmq:myrabbitmq</link>
+								</links>
+								<env>
+									<SPRING_RABBITMQ_HOST>myrabbitmq</SPRING_RABBITMQ_HOST>
+								</env>
+								<dependsOn>
+									<container>myrabbitmq</container>
+									<container>pageviewservice</container>
+								</dependsOn>
+							</run>
+						</image>
+						<!--mysql container -->
+						<image>
+							<name>postgres</name>
+							<alias>postgres</alias>
+							<run>
+								<ports>
+									<port>5433:5432</port>
+								</ports>
+								<env>
+									<MYSQL_DATABASE>pageviewservice</MYSQL_DATABASE>
+									<MYSQL_ROOT_PASSWORD>root</MYSQL_ROOT_PASSWORD>
+									<!-- <MYSQL_ALLOW_EMPTY_PASSWORD>yes</MYSQL_ALLOW_EMPTY_PASSWORD> -->
+								</env>
+								<wait>
+									<time>10000</time>
+								</wait>
+							</run>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<scripts>
+						<script>file:///${project.basedir}/src/main/resources/scripts/BuildDockerfile.groovy</script>
+					</scripts>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-all</artifactId>
+						<!-- any version of Groovy \>= 1.5.0 should work here -->
+						<version>2.4.8</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
+
 	</build>
 
 

@@ -42,6 +42,7 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
 			final Object username = authentication.getPrincipal();
 			final Object password = authentication.getCredentials();
 			
+			//------------- LDAP --------------
 //			//try to retrieve user by username/pwd, and also email/pwd
 //			DirContext ctx = this.ldapService.checkAuth(username.toString(), password.toString(), "uid");
 //			if(ctx == null){

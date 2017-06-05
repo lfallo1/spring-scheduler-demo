@@ -41,12 +41,10 @@ public class FilmScheduler {
 	 */
 	@Scheduled(fixedDelay = 60000, initialDelay=1000)
 	public void addDummyFilms() {
-		for(int i = 0; i < 50; i++){
-			String title = "johndoe_" + new Date().getTime();
-			Film film = new Film(null, title, "action", new Date());
-			Integer newFilmId = filmService.addFilm(film);
-			logger.info("##New film added: filmId#" + newFilmId);	
-		}
+		String title = "johndoe_" + new Date().getTime();
+		Film film = new Film(null, title, "action", new Date());
+		Integer newFilmId = filmService.addFilm(film);
+		logger.info("##New film added: filmId#" + newFilmId);	
 	}
 	
 }

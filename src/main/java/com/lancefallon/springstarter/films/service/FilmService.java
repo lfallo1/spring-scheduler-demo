@@ -9,8 +9,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lancefallon.springstarter.films.event.FilmRetrievedEvent;
-import com.lancefallon.springstarter.films.event.FilmRetrievedEventPublisher;
+import com.lancefallon.springstarter.config.event.CustomApplicationEventPublisher;
+import com.lancefallon.springstarter.films.event.FilmAddedEvent;
+import com.lancefallon.springstarter.films.event.FilmAddedEventPublisher;
 import com.lancefallon.springstarter.films.model.Film;
 import com.lancefallon.springstarter.films.repository.FilmRepository;
 
@@ -23,13 +24,10 @@ public class FilmService {
 	private FilmRepository filmRepository;
 	
 	@Autowired
-	private FilmRetrievedEventPublisher filmRetrievedEventPublisher;
+	private CustomApplicationEventPublisher eventPublisher;
 
 	public List<Film> findAll(){
-		List<Film> films = filmRepository.findAll();
-		filmRetrievedEventPublisher.publish(new FilmRetrievedEvent(films));
-		logger.info("##LOGGER=> " + films.toString());
-		return films;
+		return filmRepository.findAll();
 	}
 	
 	public Film findById(Integer id){
@@ -37,10 +35,15 @@ public class FilmService {
 	}
 	
 	public Integer addFilm(Film film){
-		return filmRepository.addFilm(film);
+		Integer result = filmRepository.addFilm(film);
+		if(result > 0){
+			eventPublisher.publish(new FilmAddedEvent(film));
+		}
+		return result;
 	}
 	
 	public Map<Integer, String> getFilmsMap(){
+		logger.info("##LOGGER=> loading films map");
 		return filmRepository.findAll().stream()
 				.collect(Collectors.toMap(u->u.getId(), u->u.getTitle()));
 	}

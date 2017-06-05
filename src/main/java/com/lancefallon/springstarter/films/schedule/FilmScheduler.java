@@ -1,13 +1,23 @@
 package com.lancefallon.springstarter.films.schedule;
 
+import java.util.Date;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.lancefallon.springstarter.films.model.Film;
+import com.lancefallon.springstarter.films.service.FilmService;
 
 @Component
 public class FilmScheduler {
 	
-//	@Autowired
-//	private FilmService filmService;
+	private static final Logger logger = LogManager.getLogger(FilmScheduler.class);
+	
+	@Autowired
+	private FilmService filmService;
 //	
 //	@Autowired
 //	private EmailService<EmailConfigFilms> emailService;
@@ -17,7 +27,6 @@ public class FilmScheduler {
 	 * @throws InterruptedException 
 	 */
 //	@Scheduled(cron = "0 48 13 * * *")
-	@Scheduled(fixedDelay = 15000, initialDelay=7000)
 	public void emailFilmReport() throws InterruptedException{
 //		EmailConfigFilms config = new EmailConfigFilms();
 //		config.setTo("fallon.lance@gmail.com");
@@ -28,16 +37,16 @@ public class FilmScheduler {
 	}
 	
 	/**
-	 * run every five seconds, with an initial 1 second delay
+	 * run every 60 seconds, with an initial 1 second delay
 	 */
-	@Scheduled(fixedDelay = 60000*60, initialDelay=1000)
+	@Scheduled(fixedDelay = 60000, initialDelay=1000)
 	public void addDummyFilms() {
-//		for(int i = 0; i < 50; i++){
-//			String title = "johndoe_" + new Date().getTime();
-//			Film film = new Film(null, title, "action", new Date());
-//			Integer newFilmId = filmService.addFilm(film);
-//			System.out.println("New film added: filmId#" + newFilmId);	
-//		}
+		for(int i = 0; i < 50; i++){
+			String title = "johndoe_" + new Date().getTime();
+			Film film = new Film(null, title, "action", new Date());
+			Integer newFilmId = filmService.addFilm(film);
+			logger.info("##New film added: filmId#" + newFilmId);	
+		}
 	}
 	
 }

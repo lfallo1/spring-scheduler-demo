@@ -10,10 +10,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.lancefallon.springstarter.config.dbrouting.domain.DbContextHolder;
 import com.lancefallon.springstarter.config.dbrouting.domain.DbType;
+import com.lancefallon.springstarter.config.jms.Listener.HealthCheckListener;
 
 public class DbFilter implements Filter {
+	
+	private static final Logger logger = LogManager.getLogger(DbFilter.class);
+	
 	private static final String RESPONSE_HEADER_EXPIRES = "Expires";
 
 	private static final String NO_CACHE = "no-cache";
@@ -47,7 +54,9 @@ public class DbFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("In App Filter");
+		
+		logger.debug("##In App Filter");
+		
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		httpResponse.setHeader(RESPONSE_HEADER_CACHE_CONTROL, NO_CACHE_NO_STORE_MUST_REVALIDATE);
 		// HTTP 1.0. Proxies.

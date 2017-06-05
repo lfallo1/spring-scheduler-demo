@@ -8,7 +8,7 @@
 		{{film.title}} - {{film.genre}}
 	</li>
 </ul>
-<div class="alert alert-danger" ng-if="filmApiError || !authentication">Please <a ui-sref="site.login">login</a> to see the list of films</div>
+<div class="alert alert-danger" ng-if="filmApiError || !user">Please <a ui-sref="site.login">login</a> to see the list of films</div>
 <div class="text-center btn-link" ng-click="loadFilms()">Reload</div>
 
 <!-- absolute path is filmtable@site.home -->

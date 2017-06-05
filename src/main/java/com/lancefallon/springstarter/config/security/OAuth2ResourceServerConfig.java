@@ -29,7 +29,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/app/**", "/bower/**", "/manage/**").permitAll()
+			.antMatchers("/", "/app/**", "/bower/**", "/manage/**", "/config").permitAll()
 			.anyRequest().authenticated().and()
 			.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler()).and()
 			.logout().logoutSuccessHandler(logoutHandler);

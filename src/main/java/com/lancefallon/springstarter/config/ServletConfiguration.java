@@ -45,7 +45,7 @@ public class ServletConfiguration implements EmbeddedServletContainerCustomizer 
 	private AppProperties appConfig;
 
 	public DataSource getDefaultDataSource() {
-	
+
 		/**
 		 * primary datasource
 		 */
@@ -170,18 +170,19 @@ public class ServletConfiguration implements EmbeddedServletContainerCustomizer 
 	public void migrateFlyway() {
 		Flyway flyway = new Flyway();
 
-		//syndication_backup database
+		// syndication_backup database
 		flyway.setLocations(appConfig.getFlywayLocations());
 		flyway.setTarget(MigrationVersion.LATEST);
 		flyway.setDataSource(getBackupDataSource());
-		flyway.migrate();	
+		flyway.migrate();
 	}
 
 	/**
-	 * configure 404s to be redirected to a request mapper that accepts routes of 404.html
+	 * configure 404s to be redirected to a request mapper that accepts routes
+	 * of 404.html
 	 */
 	@Override
-	  public void customize(ConfigurableEmbeddedServletContainer container) {
-	    container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
-	  }
+	public void customize(ConfigurableEmbeddedServletContainer container) {
+		container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
+	}
 }

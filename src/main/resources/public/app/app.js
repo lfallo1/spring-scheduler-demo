@@ -20,7 +20,13 @@ angular.module('springDemoApp', ['ui.router', 'siteModule', 'angular-storage'])
 	                    'changedb@site': {
 	                        templateUrl: 'app/shared/changeDb/changeDb.html',
 	                        controller: 'ChangeDbCtrl'
-	                    }
+	                    },
+	                    
+	                    // named view on the 'site' state
+	                    'gitinfo@site': {
+	                        templateUrl: 'app/shared/gitInfo/gitInfo.html',
+	                        controller: 'GitInfoCtrl'
+	                    }	                    
 	                }
 	            })
 	            .state('admin', {//State demonstrating Multiple,named views

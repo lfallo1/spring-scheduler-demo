@@ -25,6 +25,18 @@
 			});
 			return deferred.promise;
 		}
+		
+		service.apiSendGetNoToken = function(url){
+			var deferred = $q.defer();
+
+			$http.get(url).then(function(res){
+				deferred.resolve(res.data);
+			}, function(err){
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		};
 
 		service.apiSendGet = function(url){
 			var deferred = $q.defer();

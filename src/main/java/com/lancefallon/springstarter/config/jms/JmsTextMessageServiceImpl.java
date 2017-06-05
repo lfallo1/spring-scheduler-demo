@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 public class JmsTextMessageServiceImpl implements JmsTextMessageService {
 
 	@Autowired
-	private Queue textMessageQueue;
+	private Queue textMessageHealthCheckQueue;
 	
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
 	@Override
 	public void sendTextMessage(String msg) {
-		this.jmsTemplate.convertAndSend(this.textMessageQueue, msg);
+		this.jmsTemplate.convertAndSend(this.textMessageHealthCheckQueue, msg);
 	}
 }

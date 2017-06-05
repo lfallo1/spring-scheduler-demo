@@ -3,13 +3,15 @@ package com.lancefallon.springstarter.config.jms;
 import javax.jms.Queue;
 
 import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JmsConfig {
 
-	public static final String textMsgHealthcheckQueue = "text.healthcheck";
+	@Value("${messagequeues.text.healthcheck}")
+	private String textMsgHealthcheckQueue;
 
 	@Bean
 	public Queue textMessageHealthCheckQueue() {

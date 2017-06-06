@@ -3,7 +3,7 @@ String template = new File("${project.basedir}/src/main/resources/docker/PushIma
 def dockerFileText = new groovy.text.SimpleTemplateEngine().createTemplate(template)
         .make([tag: project.version])
 
-println "writing dir " + "${project.basedir}/src/main/resources/scripts/pushImage.sh"
+println "writing dir " + "${project.basedir}/pushImage.sh"
 
 println "writing file"
 File dockerFile = new File("${project.basedir}/pushImage.sh".toString())

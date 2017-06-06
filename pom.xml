@@ -259,6 +259,7 @@
 					<scripts>
 						<script>file:///${project.basedir}/src/main/resources/scripts/BuildDockerfile.groovy</script>
 						<script>file:///${project.basedir}/src/main/resources/scripts/BuildPushImageScript.groovy</script>
+						<script>file:///${project.basedir}/src/main/resources/scripts/BuildDockerCompose.groovy</script>
 					</scripts>
 				</configuration>
 				<dependencies>

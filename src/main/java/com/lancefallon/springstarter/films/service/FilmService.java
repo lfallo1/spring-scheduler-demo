@@ -4,21 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lancefallon.springstarter.config.event.CustomApplicationEventPublisher;
 import com.lancefallon.springstarter.films.event.FilmAddedEvent;
-import com.lancefallon.springstarter.films.event.FilmAddedEventPublisher;
 import com.lancefallon.springstarter.films.model.Film;
 import com.lancefallon.springstarter.films.repository.FilmRepository;
 
 @Service
 public class FilmService {
 	
-	private static final Logger logger = LogManager.getLogger(FilmService.class);
+	private static final Logger logger = Logger.getLogger(FilmService.class);
 	
 	@Autowired
 	private FilmRepository filmRepository;

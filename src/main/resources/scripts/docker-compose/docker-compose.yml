@@ -5,11 +5,12 @@ services:
     restart: "no"
     ports:
       - "8080:8080"
-      - "8888:8888"
     links:
-      - postgres:postgres
+      - mailcatcher
+      - adminserver
     depends_on:
-      - postgres
+      - mailcatcher
+      - adminserver
     environment:
       SPRING_PROFILES_ACTIVE: docker
     healthcheck:
@@ -25,3 +26,16 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
+  mailcatcher:
+    image: tophfr/mailcatcher
+    restart: always
+    ports:
+      - "1080:80"
+      - "1025:25"
+  adminserver:
+    image: lfallo1/springbootadminserver:1.0
+    restart: always
+    ports:
+      - "8888:8888"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker      

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -30,11 +32,22 @@ public class FilmController {
 
 	@Autowired
 	private FilmService filmService;
+	
+	@Autowired
+	private CounterService counterService;
+	
+	@Autowired
+	private GaugeService gaugeService;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Film>> findAllFilms(){
-		ResponseEntity<List<Film>> response = new ResponseEntity<>(filmService.findAll(), HttpStatus.OK);
-		return response;
+		
+		List<Film> films = filmService.findAll();
+		
+		//custom counter/gauge metric
+		counterService.increment("com.lancefallon.springboot.services.counter.filmsendpoint");
+		gaugeService.submit("com.lancefallon.springboot.services.totalfilms", films.size());
+		return new ResponseEntity<>(films, HttpStatus.OK);
 	}
 	 
 	@RequestMapping(value="/auth/{username}", method=RequestMethod.GET)

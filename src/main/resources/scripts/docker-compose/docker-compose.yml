@@ -5,6 +5,7 @@ services:
     restart: "no"
     ports:
       - "8080:8080"
+      - "8888:8888"
     links:
       - postgres:postgres
     depends_on:

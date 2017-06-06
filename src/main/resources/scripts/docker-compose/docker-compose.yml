@@ -1,7 +1,7 @@
 version: "3.1"
 services:
   spring-boot-docker:
-    image: lfallo1/springbootstarter:0.0.1-SNAPSHOT
+    image: lfallo1/springbootstarter:2.0
     restart: "no"
     ports:
       - "8080:8080"

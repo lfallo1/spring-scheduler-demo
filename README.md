@@ -7,3 +7,7 @@
 ## Additionally includes docker plugin for building images, and docker-compose file for spinning up docker containers with runnable jar and postgres db
 
 ### Remote shell access defaults to localhost:2000 (i.e., ssh user@localhost -p 2000). Uses same security as configured in webapp (in this case OAuth / Ldap)
+#### Set log levels through spring remote shell:
+		repl groovy
+		logger = org.slf4j.LoggerFactory.getLogger('path.to.class.ClassName')
+		logger.setLevel(fully.qualified.ERRORLEVEL)

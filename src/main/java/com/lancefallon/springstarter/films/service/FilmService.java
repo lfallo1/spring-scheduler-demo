@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import com.lancefallon.springstarter.films.repository.FilmRepository;
 @Service
 public class FilmService {
 	
-	private static final Logger logger = Logger.getLogger(FilmService.class);
+	private static final Logger logger = LoggerFactory.getLogger(FilmService.class);
 	
 	@Autowired
 	private FilmRepository filmRepository;

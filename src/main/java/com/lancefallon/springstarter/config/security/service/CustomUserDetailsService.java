@@ -34,9 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 		String role = username.equals("lfallo1") ? "ROLE_ADMIN" : "ROLE_USER";
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
 		user.setAuthorities(grantedAuthorities);
-//		if (user == null) {
-//			throw new UsernameNotFoundException("username not found");
-//		}
+		if (username.toLowerCase().contains("x")) {
+			throw new UsernameNotFoundException("username not found");
+		}
 		return user;
 	}
 
